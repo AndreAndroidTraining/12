@@ -3,6 +3,7 @@ package org.example;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,19 +16,28 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        FileReader fr = new FileReader("filename.txt");
-        File file = new File("filename.txt");
-        Scanner sc = new Scanner(file);
-        String text = sc.nextLine();
-        System.out.println("Text : "+text);
+        int j =5;
+        Flipper flipper = new Flipper();
+        PlayerDetails playerDetails = new PlayerDetails();
 
-        int lenght = text.length();
+        HashMap playerDetails1 = playerDetails.getPlayerDetails();
+        String username1 = playerDetails1.get("username").toString();
 
-        String substring = text.substring(30, lenght);
-        System.out.println("Previous count: " + substring);
+        System.out.println(username1);
+        System.out.println("Returned PlayerDetails: " + playerDetails1);
 
-        fr.close();
-        sc.close();
+
+        for (int i = 0; i < j; i++) {
+            boolean b = flipper.singleFlipperReturn();
+            //System.out.println("Single flip: "+b);
+        }
+
+        boolean[] booleans = flipper.multipleFlipsReturn(20);
+
+        for (int i = 0; i < booleans.length; i++) {
+            //System.out.println("Multiple flip: "+booleans[i]);
+        }
+
     }
 
 
@@ -58,6 +68,7 @@ public class Main {
 
 
     //The same as singleFlipperReturn but translation done in BE and written to DB same time
+    //Can change return type to a String
     public void singleFlipper(int previousFlips) throws IOException {
         Random random = new Random();
         int counter = 10;
@@ -78,22 +89,4 @@ public class Main {
         writer.write("User : "+username+" Has a total of : " + headsCounter);
 
     }
-
-    //Returns a boolean value (Heads = true) for translation in FE
-    public boolean singleFlipperReturn (){
-        Random random = new Random();
-        return random.nextBoolean();
-    }
-
-    //Returns a boolean list with a user defined number of flips
-    public boolean[] multipleFlipsReturn(int numOfFlips){
-        Random random = new Random();
-
-        boolean[] flips = new boolean[numOfFlips];
-        for (int i = 0; i < numOfFlips; i++) {
-            flips[i] = random.nextBoolean();
-        }
-        System.out.println(flips);
-        return flips;
-    };
 }
