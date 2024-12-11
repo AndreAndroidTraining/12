@@ -1,12 +1,8 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -29,64 +25,24 @@ public class Main {
 
         for (int i = 0; i < j; i++) {
             boolean b = flipper.singleFlipperReturn();
-            //System.out.println("Single flip: "+b);
+            boolean b1 = flipper.singleFlipperComplex();
+            System.out.println("Single flip simple: "+b);
+            System.out.println("Single flip complex: "+b1);
         }
 
-        boolean[] booleans = flipper.multipleFlipsReturn(20);
+        boolean[] booleans = flipper.multipleFlipsReturn(5);
+        boolean[] booleans1 = flipper.multipleFlipsComplex(5);
 
         for (int i = 0; i < booleans.length; i++) {
-            //System.out.println("Multiple flip: "+booleans[i]);
+            System.out.println("Multiple flip simple: "+booleans[i]);
+        }
+
+        for (int i = 0; i < booleans1.length; i++) {
+            System.out.println("Multiple flip simple: "+booleans[i]);
         }
 
     }
 
 
-    public void multipleFlips(int numOfFlips) throws IOException {
-        Random random = new Random();
-        int counter = 10;
-        int headsCounter = numOfFlips;
 
-        for (int i = 0; i < counter; i++) {
-            boolean value = random.nextBoolean();
-
-            if (value) {
-                System.out.println("HEADS!");
-                headsCounter++;
-
-            }else
-                System.out.println("TAILS!");
-
-        }
-
-        System.out.println(headsCounter-numOfFlips +" Head(s) counts have been added to the total");
-
-        new CreateFile();
-        MyFileWriter writer = new MyFileWriter();
-        writer.write("User : "+username+" Has a total of : " + headsCounter);
-
-    }
-
-
-    //The same as singleFlipperReturn but translation done in BE and written to DB same time
-    //Can change return type to a String
-    public void singleFlipper(int previousFlips) throws IOException {
-        Random random = new Random();
-        int counter = 10;
-        int headsCounter = previousFlips;
-
-        boolean value = random.nextBoolean();
-
-        if (value) {
-             System.out.println("HEADS!");
-             headsCounter++;
-        }else
-             System.out.println("TAILS!");
-
-        System.out.println(headsCounter-previousFlips +" Head(s) counts have been added to the total");
-
-        new CreateFile();
-        MyFileWriter writer = new MyFileWriter();
-        writer.write("User : "+username+" Has a total of : " + headsCounter);
-
-    }
 }
