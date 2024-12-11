@@ -1,92 +1,39 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) throws IOException {
-        String Username = "Andre";
-        FileReader fr = new FileReader("filename.txt");
-        File file = new File("filename.txt");
-        Scanner sc = new Scanner(file);
-        
-        String text = sc.nextLine();
+        int singleFlips =5;
+        int multiFlips = 10;
+        Flipper flipper = new Flipper();
+        PlayerDetails playerDetails = new PlayerDetails();
 
-        System.out.println("Text : "+text);
+        HashMap playerDetails1 = playerDetails.getPlayerDetails();
+        String username1 = playerDetails1.get("username").toString();
 
-        int lenght = text.length();
+        System.out.println("Returned PlayerDetails: " + playerDetails1);
 
-        String previousCount = text.substring(30, lenght);
-        System.out.println("Previous count: " + previousCount);
-
-        fr.close();
-        sc.close();
-
-        Random random = new Random();
-        int counter = 10;
-        int headsCounter = Integer.parseInt(previousCount);
-
-        for (int i = 0; i < counter; i++) {
-            boolean value = random.nextBoolean();
-
-            if (value) {
-                System.out.println("HEADS!");
-                headsCounter++;
-
-            }else
-                System.out.println("TAILS!");
-
+        //Test for Single flip method calls
+        for (int i = 0; i < singleFlips; i++) {
+            boolean b = flipper.singleFlipperReturn();
+            boolean b1 = flipper.singleFlipperComplex();
+            System.out.println("Single flip simple: "+b);
+            System.out.println("Single flip complex: "+b1);
         }
 
-        System.out.println(headsCounter-Integer.parseInt(previousCount) +" Head(s) counts have been added to the total");
+        //Tests for Multiple flips
+        boolean[] booleans = flipper.multipleFlipsReturn(multiFlips);
+        boolean[] booleans1 = flipper.multipleFlipsComplex(multiFlips);
 
-        new CreateFile();
-        MyFileWriter writer = new MyFileWriter();
-        writer.write("User : "+Username+" Has a total of : " + headsCounter);
-
-    }
-
-    public void singleFlipper() throws IOException {
-        String Username = "Andre";
-        FileReader fr = new FileReader("filename.txt");
-        File file = new File("filename.txt");
-        Scanner sc = new Scanner(file);
-
-        String text = sc.nextLine();
-
-        System.out.println("Text : "+text);
-
-        int lenght = text.length();
-
-        String previousCount = text.substring(30, lenght);
-        System.out.println("Previous count: " + previousCount);
-
-        fr.close();
-        sc.close();
-
-        Random random = new Random();
-        int counter = 10;
-        int headsCounter = Integer.parseInt(previousCount);
-
-        boolean value = random.nextBoolean();
-
-        if (value) {
-             System.out.println("HEADS!");
-             headsCounter++;
-        }else
-             System.out.println("TAILS!");
-
-        System.out.println(headsCounter-Integer.parseInt(previousCount) +" Head(s) counts have been added to the total");
-
-        new CreateFile();
-        MyFileWriter writer = new MyFileWriter();
-        writer.write("User : "+Username+" Has a total of : " + headsCounter);
+        for (int i = 0; i < multiFlips; i++) {
+            System.out.println("Multiple flip simple: "+booleans[i]);
+            System.out.println("Multiple flip simple: "+booleans1[i]);
+        }
 
     }
 }
