@@ -37,7 +37,7 @@ public class Flipper {
 
         new CreateFile();
         MyFileWriter writer = new MyFileWriter();
-        writer.write("User :  Has a total of : " + headsCounter);
+        writer.write("User : Andre Has a total of : " + headsCounter);
 
         return value;
 
@@ -68,7 +68,7 @@ public class Flipper {
 
         new CreateFile();
         MyFileWriter writer = new MyFileWriter();
-        writer.write("User : Has a total of : " + headsCounter);
+        writer.write("User : Andre Has a total of : " + headsCounter);
         return array;
     }
 
